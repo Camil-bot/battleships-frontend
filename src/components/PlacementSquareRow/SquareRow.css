@@ -1,0 +1,15 @@
+.squareRow{
+ 
+   height:100px;
+   width:100px;
+   padding: 0px 0px;
+   cursor:pointer;
+   border-radius: 0;
+
+}
+
+.custom-margins{
+    padding: 0px;
+
+    margin: 0px;
+}

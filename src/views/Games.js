@@ -1,14 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import GameCard from "../components/GameCard/GameCard";
-import {
-  Row,
-  Col,
-  Button,
-  Input,
-  InputGroup,
-  Alert
-} from "reactstrap";
+import { Row, Col, Button, Input, InputGroup, Alert } from "reactstrap";
 import { getPlayer } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { postCreateGame, getAllGames, postJoinGame } from "../api/ApiAxios";
@@ -51,8 +44,6 @@ const Games = () => {
       return;
     }
 
-
-
     localStorage.setItem("currentGame", gameID);
     localStorage.setItem("playerId", response.data.player2Id); // same to join by card!!!!
     console.log(response);
@@ -87,7 +78,7 @@ const Games = () => {
 
           <Col md={3}>
             <Button
-            color="primary"
+              color="primary"
               onClick={() => {
                 handleJoinByID(gameIDRef.current.value);
               }}
@@ -95,11 +86,19 @@ const Games = () => {
             >
               Join Game
             </Button>
-      <Button onClick={createGame} color="primary" className="ms-2"  outline>Create Game</Button>
+            <Button
+              onClick={createGame}
+              color="primary"
+              className="ms-2"
+              outline
+            >
+              Create Game
+            </Button>
           </Col>
         </Row>
         <h4>
-          <b>Active Games</b><br/>
+          <b>Active Games</b>
+          <br />
           The first games are the most recent ones
         </h4>
         <Row className="row gy-5 p-3">

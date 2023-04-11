@@ -5,7 +5,7 @@ import { Row, Col } from "reactstrap";
 
 const GameSquareRow = (props) => {
   const xCoordList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-
+  // console.log(props.setHitCounter);
   return (
     <>
       {xCoordList.map((xCoord) => (
@@ -20,6 +20,8 @@ const GameSquareRow = (props) => {
             refreshTriggerFn={props.refreshTriggerFn}
             isPlayerBoard={props.isPlayerBoard}
             usedFields={props.usedFields}
+            setHitCounter={props.setHitCounter}
+            hitCounter={props.hitCounter}
           />
         </Col>
       ))}

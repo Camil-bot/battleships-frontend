@@ -10,7 +10,8 @@ import GameSetup from "../views/GameSetup";
 import { Container, Row, Col } from "reactstrap";
 import Game from "../views/Game";
 import Loby from "../views/Loby";
-import { GameFinished } from "../views/GameFinished";
+import { GameFinishedWon } from "../views/GameFinishedWon";
+import { GameFinishedLost } from "../views/GameFinishedLost";
 
 const Authenticated = () => {
   const navigate = useNavigate();
@@ -36,7 +37,8 @@ const Authenticated = () => {
               <Route path="/gameSetup" element={<GameSetup />} />
               <Route path="/game" element={<Game />} />
               <Route path="/loby" element={<Loby />} />
-              <Route path="/finished-game" element={<GameFinished />} />
+              <Route path="/finished-game-L" element={<GameFinishedLost />} />
+              <Route path="/finished-game-W" element={<GameFinishedWon />} />
               <Route path="/*" element={<Navigate to="/user/dashboard" />} />
             </Routes>
           </Col>

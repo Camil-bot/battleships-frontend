@@ -4,7 +4,7 @@ import { postGameStrike } from "../../api/ApiAxios";
 import { useGameStatus } from "../../hooks/useSquareStatus";
 import classNames from "classnames";
 
-const GameAtackSquare = props => {
+const GameAtackSquare = (props) => {
   const [pressed, setPressed] = useState(false);
   const { colorBtn, targetHit } = useGameStatus({
     xCoord: props.xCoord,
@@ -16,6 +16,10 @@ const GameAtackSquare = props => {
       localStorage.getItem("currentGame"),
       coordinates
     );
+    if (response.data.result === true) {
+      props.setHitCounter(props.hitCounter + 1);
+    }
+
     return response;
   }
 
@@ -34,7 +38,7 @@ const GameAtackSquare = props => {
         color={
           props.usedFields
             .split(",")
-            .find(field => field === props.xCoord + props.yCoord)
+            .find((field) => field === props.xCoord + props.yCoord)
             ? "danger"
             : "success"
         }

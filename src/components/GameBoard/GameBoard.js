@@ -11,7 +11,7 @@ const GameBoard = (props) => {
   const [enableMove, setEnableMove] = useState();
   const { gameStatus, setMoves } = useContext(CurrentGameContext);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
-  const [finishedGame, setFinishedGame] = useState(false);
+  const [hitCounter, setHitCounter] = useState(0);
 
   async function refreshGameDetails() {
     try {
@@ -22,12 +22,16 @@ const GameBoard = (props) => {
       setMoves(response.data, response.data.moves);
 
       // check if the game is over
-      if (response.data.status === "FINISHED") {
+      if (hitCounter === 31) {
         localStorage.removeItem("currentGame");
         localStorage.removeItem("playerId");
         localStorage.removeItem("usedFields");
-        setFinishedGame(true);
-        navigate("/user/finished-game");
+        navigate("/user/finished-game-W");
+      } else if (response.data.status === "FINISHED") {
+        localStorage.removeItem("currentGame");
+        localStorage.removeItem("playerId");
+        localStorage.removeItem("usedFields");
+        navigate("/user/finished-game-L");
       }
 
       // check if the is active and playerToMoveId from localStorage ID is the same as the current player
@@ -48,6 +52,7 @@ const GameBoard = (props) => {
     if (localStorage.getItem("currentGame")) {
       const intervalID = setInterval(async () => {
         await refreshGameDetails();
+        // console.log(hitCounter);
       }, parseInt(process.env.REACT_APP_REFRESH_TIME));
 
       return () => {
@@ -73,14 +78,12 @@ const GameBoard = (props) => {
         <Row>
           <Col>
             <h3>
-              {props.isPlayerBoard ? "My board" : "Opponent's board"}{!props.isPlayerBoard ? (<>
-                {enableMove ? " -- Your turn" : " -- His turn"}
-              </>) : null}
+              {props.isPlayerBoard ? "My board" : "Opponent's board"}
+              {!props.isPlayerBoard ? (
+                <>{enableMove ? " -- Your turn" : " -- His turn"}</>
+              ) : null}
             </h3>
-            <h4>
-              
-
-            </h4>
+            <h4></h4>
           </Col>
         </Row>
         <Row>
@@ -95,12 +98,13 @@ const GameBoard = (props) => {
                       refreshTriggerFn={refreshTriggerFn}
                       isPlayerBoard={props.isPlayerBoard}
                       usedFields={props.usedFields}
-
+                      setHitCounter={setHitCounter}
+                      hitCounter={hitCounter}
                     />
                   </Row>
                 </>
               ))}
-              <Row></Row>
+              <Row>Your score: {hitCounter}</Row>
             </Container>
           </Col>
         </Row>

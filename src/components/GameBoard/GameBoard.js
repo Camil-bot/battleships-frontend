@@ -52,7 +52,6 @@ const GameBoard = (props) => {
     if (localStorage.getItem("currentGame")) {
       const intervalID = setInterval(async () => {
         await refreshGameDetails();
-        // console.log(hitCounter);
       }, parseInt(process.env.REACT_APP_REFRESH_TIME));
 
       return () => {

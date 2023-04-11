@@ -18,15 +18,12 @@ export const useGameStatus = () => {
 
   useEffect(() => {
     if (localStorage.getItem("currentGame")) {
-      // this is the initial fetch of the game details
       fetchGameDetails();
 
-      // this is the interval that will refresh the game details every 5 seconds
       const intervalID = setInterval(async () => {
         await fetchGameDetails();
       }, parseInt(process.env.REACT_APP_REFRESH_TIME));
 
-      // cleanup function that will clear the interval
       return () => {
         clearInterval(intervalID);
       };

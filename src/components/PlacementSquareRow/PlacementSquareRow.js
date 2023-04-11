@@ -12,10 +12,7 @@ const PlacementSquareRow = (props) => {
   return (
     <>
       {xCoordList.map((xCoord) => (
-        <Col
-          className="m-0 p-0"
-          // style={{ padding: "0px 0px", backgroundColor: "red", margin: "0px" }}
-        >
+        <Col className="m-0 p-0">
           <PlacementSquare xCoord={xCoord} yCoord={props.yCoord} />
         </Col>
       ))}
